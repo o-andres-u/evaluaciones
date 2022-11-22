@@ -1,4 +1,5 @@
 -- Script de base de datos en MySQL 8 para crear las tablas necesarias de la implementación a entregar
+
 CREATE TABLE tema(
 identificador VARCHAR(30) PRIMARY KEY,
 titulo VARCHAR(50) NOT NULL
