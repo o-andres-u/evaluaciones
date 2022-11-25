@@ -106,3 +106,4 @@ WHERE p.identificador = @id;
 SELECT p.identificador, p.enunciado
 FROM pregunta p
 WHERE p.pregunta_madre = @id;
+
