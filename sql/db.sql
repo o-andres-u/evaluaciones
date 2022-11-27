@@ -1,4 +1,4 @@
--- Script de base de datos en MySQL 8 para crear las tablas necesarias de la implementación a entregar
+-- Script de base de datos en MySQL 8 para crear las tablas necesarias de la implementaciÃ³n a entregar
 
 CREATE TABLE tema(
 identificador VARCHAR(30) PRIMARY KEY,
@@ -24,26 +24,26 @@ FOREIGN KEY (pregunta_asignada) REFERENCES pregunta(identificador) ON UPDATE CAS
 PRIMARY KEY(tema_evaluado, pregunta_asignada)
 );
 
--- Datos por defecto para ser insertados luego de la creación de las tablas
+-- Datos por defecto para ser insertados luego de la creaciÃ³n de las tablas
 
 INSERT INTO tema(identificador, titulo) 
-VALUES('T01', 'Termodinámica'),
+VALUES('T01', 'TermodinÃ¡mica'),
 	  ('T02', 'Series y sucesiones'),
-      ('T03', 'Máquinas de estado'),
+      ('T03', 'MÃ¡quinas de estado'),
       ('T04', 'Mapas de Karnaugh'),
-      ('T05', 'Área entre curvas');
+      ('T05', 'Ãrea entre curvas');
       
 INSERT INTO pregunta(identificador, enunciado, anio_creacion, nivel_dificultad, pregunta_madre)
-VALUES('P01', '¿Qué es entropía?', 2020, 2, NULL),
-	  ('P02', '¿Qué es una serie o sucesión?', 2005, 2, NULL),
+VALUES('P01', 'Â¿QuÃ© es entropÃ­a?', 2020, 2, NULL),
+	  ('P02', 'Â¿QuÃ© es una serie o sucesiÃ³n?', 2005, 2, NULL),
       ('P03', 'Defina y demuestre la serie de Taylor', 2006, 5, 'P02'),
       ('P04', 'Brinde un ejemplo de la serie Fibonacci', 2006, 2, 'P02'),
-      ('P05', '¿Cuál es el objetivo de un mapa de Karnaugh?', 2019, 1, NULL),
+      ('P05', 'Â¿CuÃ¡l es el objetivo de un mapa de Karnaugh?', 2019, 1, NULL),
       ('P06', 'Resuelva el siguiente mapa de Karnaugh', 2021, 3, 'P05'),
-      ('P07', 'Calcule el área de la figura y explique', 2022, 3, NULL),
-      ('P08', '¿Para qué sirve una máquina de estado?', 2017, 1, NULL),
+      ('P07', 'Calcule el Ã¡rea de la figura y explique', 2022, 3, NULL),
+      ('P08', 'Â¿Para quÃ© sirve una mÃ¡quina de estado?', 2017, 1, NULL),
       ('P09', 'Resuelva la siguiente tabla de verdad', 2021, 3, 'P08'),
-      ('P10', 'Calcule la ecuación de mintérminos para la anterior tabla de verdad', 2021, 3, 'P09');
+      ('P10', 'Calcule la ecuaciÃ³n de mintÃ©rminos para la anterior tabla de verdad', 2021, 3, 'P09');
       
 INSERT INTO conocimiento_evaluado(tema_evaluado, pregunta_asignada, peso)
 VALUES('T01', 'P01', 10),
@@ -83,9 +83,9 @@ WHERE t.identificador IN (
     HAVING COUNT(ce.tema_evaluado) >= 3 AND SUM(ce.peso) > 50
 );
 
--- Búsquedas
+-- BÃºsquedas
 
--- Primera búsqueda
+-- Primera bÃºsqueda
 SET @anio_1 = 2010;
 SET @anio_2 = 2021;
 
@@ -93,12 +93,12 @@ SELECT p.identificador, p.enunciado
 FROM pregunta p
 WHERE p.anio_creacion > @anio_1 AND p.anio_creacion < @anio_2;
 
--- Segunda búsqueda
+-- Segunda bÃºsqueda
 
 -- Primeros 2 puntos
 SELECT p.identificador, p.enunciado, p.anio_creacion, p.pregunta_madre, madre.enunciado
 FROM pregunta p
-INNER JOIN pregunta madre
+LEFT JOIN pregunta madre
 ON p.pregunta_madre = madre.identificador
 WHERE p.identificador = @id;
 
